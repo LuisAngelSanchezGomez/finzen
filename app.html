@@ -22,7 +22,7 @@
   .wrap{max-width:980px;margin:0 auto}
   a{color:inherit;text-decoration:none}
 
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
   .brand{display:flex;align-items:center;gap:12px}
   .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--blue));
         display:grid;place-items:center;font-size:22px;font-weight:800;color:#0f1117}
@@ -30,6 +30,9 @@
   .brand small{color:var(--muted);font-size:12px;display:block;font-weight:400}
   .back{color:var(--muted);font-size:13px;border:1px solid var(--line);padding:8px 14px;border-radius:99px}
   .back:hover{color:var(--txt);border-color:var(--blue)}
+
+  .monthbar{display:flex;align-items:center;gap:10px;margin-bottom:18px;color:var(--muted);font-size:14px}
+  .monthbar select{flex:0 0 auto;width:auto;min-width:170px}
 
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
@@ -40,7 +43,7 @@
   .grid{display:grid;grid-template-columns:1fr 1.3fr;gap:16px}
   @media(max-width:780px){.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
 
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
   .panel h2{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 
   label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
@@ -55,6 +58,8 @@
   .btn{width:100%;margin-top:18px;padding:13px;border:none;border-radius:10px;cursor:pointer;
         background:linear-gradient(135deg,var(--green),var(--blue));color:#0f1117;font-weight:800;font-size:15px}
   .btn:hover{opacity:.92}
+  .btn-soft{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
+  .btn-cancel{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin-top:10px;width:100%}
 
   .list{max-height:340px;overflow-y:auto}
   .item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;margin-bottom:8px;background:var(--card2)}
@@ -63,27 +68,21 @@
   .item .info b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .item .info span{font-size:12px;color:var(--muted)}
   .item .amt{font-weight:800;font-size:15px;white-space:nowrap}
-  .item .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px}
-  .item .del:hover{color:var(--red)}
+  .item .act{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:4px}
+  .item .act:hover{color:var(--txt)}
   .empty{text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
 
-  .diezmo{margin-top:16px;background:linear-gradient(135deg,rgba(245,185,66,.12),rgba(91,141,239,.08));
-        border:1px solid rgba(245,185,66,.3);border-radius:var(--radius);padding:20px}
-  .diezmo .label{color:var(--gold);font-size:13px;margin-bottom:6px}
-  .diezmo .value{font-size:24px;font-weight:800;color:var(--gold)}
-  .diezmo small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
-
-  .impuesto{margin-top:16px;background:linear-gradient(135deg,rgba(91,141,239,.12),rgba(61,220,151,.06));
-        border:1px solid rgba(91,141,239,.3);border-radius:var(--radius);padding:20px}
+  .impuesto{background:linear-gradient(135deg,rgba(91,141,239,.12),rgba(61,220,151,.06));
+        border:1px solid rgba(91,141,239,.3);border-radius:var(--radius);padding:20px;margin-bottom:16px}
   .impuesto .label{color:var(--blue);font-size:13px;margin-bottom:6px}
   .impuesto .value{font-size:24px;font-weight:800;color:var(--blue)}
   .impuesto small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
-  .impuesto .pctrow{display:flex;align-items:center;gap:10px;margin:8px 0}
-  .impuesto .pctrow input{width:90px}
-  .impuesto .pctrow span{color:var(--muted);font-size:13px}
+  .pctrow{display:flex;align-items:center;gap:10px;margin:8px 0}
+  .pctrow input{width:110px}
+  .pctrow span{color:var(--muted);font-size:13px}
 
-  .libre{margin-top:16px;display:flex;align-items:center;justify-content:space-between;
-        background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .libre{display:flex;align-items:center;justify-content:space-between;
+        background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:16px}
   .libre span{font-size:14px;color:var(--muted)}
   .libre b{color:var(--green);font-size:22px;font-weight:800}
 
@@ -91,6 +90,7 @@
   .cat-row .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
   .bar{height:8px;background:var(--card2);border-radius:99px;overflow:hidden}
   .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--green))}
+
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px;line-height:1.6}
 </style>
 </head>
@@ -108,6 +108,11 @@
     <a class="back" href="index.html">← Inicio</a>
   </header>
 
+  <div class="monthbar">
+    <span>📅 Mes:</span>
+    <select id="mesSel" onchange="cambiarMes()"></select>
+  </div>
+
   <div class="cards">
     <div class="card">
       <div class="label">⬆️ Ingresos</div>
@@ -124,9 +129,10 @@
   </div>
 
   <div class="grid">
+    <!-- IZQUIERDA -->
     <div>
       <div class="panel">
-        <h2>➕ Nuevo movimiento</h2>
+        <h2 id="formTitulo">➕ Nuevo movimiento</h2>
         <div class="toggle">
           <button id="btnIn" class="active-in" onclick="setTipo('ingreso')">Ingreso</button>
           <button id="btnOut" onclick="setTipo('gasto')">Gasto</button>
@@ -151,7 +157,8 @@
           <option>Otro</option>
         </select>
 
-        <button class="btn" onclick="agregar()">Guardar movimiento</button>
+        <button class="btn" id="btnGuardar" onclick="guardarMovimiento()">Guardar movimiento</button>
+        <button class="btn-cancel" id="btnCancelar" onclick="cancelarEdicion()" style="display:none">Cancelar edición</button>
       </div>
 
       <div class="impuesto">
@@ -169,18 +176,51 @@
         <b id="libre">$0</b>
       </div>
 
-      <div class="panel" style="margin-top:16px">
+      <!-- GASTOS FIJOS -->
+      <div class="panel">
+        <h2>🔁 Gastos fijos</h2>
+        <div id="fijosList"></div>
+        <label>Nuevo gasto fijo</label>
+        <input id="fDesc" placeholder="Ej: Renta, Netflix, Luz...">
+        <div class="pctrow" style="margin-top:8px">
+          <input id="fMonto" type="number" placeholder="Monto" min="0" step="0.01" style="width:100%">
+        </div>
+        <select id="fCat" style="margin-top:8px">
+          <option>Servicios</option>
+          <option>Comida</option>
+          <option>Transporte</option>
+          <option>Ocio</option>
+          <option>Salud</option>
+          <option>Ahorro</option>
+          <option>Otro</option>
+        </select>
+        <button class="btn btn-soft" onclick="guardarFijo()">Guardar gasto fijo</button>
+      </div>
+
+      <!-- DATOS -->
+      <div class="panel">
         <h2>💾 Tus datos</h2>
-        <button class="btn" style="background:var(--card2);color:var(--txt);border:1px solid var(--line);margin-top:0" onclick="exportar()">⬇️ Descargar respaldo</button>
-        <label class="btn" style="background:var(--card2);color:var(--txt);border:1px solid var(--line);display:block;text-align:center;cursor:pointer;margin-top:10px">
+        <button class="btn btn-soft" style="margin-top:0" onclick="exportar()">⬇️ Descargar respaldo</button>
+        <label class="btn btn-soft" style="display:block;text-align:center;cursor:pointer;margin-top:10px">
           ⬆️ Restaurar respaldo
           <input type="file" accept="application/json" onchange="importar(event)" style="display:none">
         </label>
       </div>
     </div>
 
+    <!-- DERECHA -->
     <div>
-      <div class="panel" style="margin-bottom:16px">
+      <div class="panel">
+        <h2>🐷 Meta de ahorro (del mes)</h2>
+        <div class="pctrow">
+          <span>$</span>
+          <input id="metaInput" type="number" min="0" step="0.01" placeholder="0" oninput="setMeta()" style="width:100%">
+        </div>
+        <div class="bar" style="margin-top:12px"><i id="metaBar" style="width:0%"></i></div>
+        <div id="metaTexto" style="color:var(--muted);font-size:13px;margin-top:10px">Pon tu meta y registra ahorros con la categoría "Ahorro".</div>
+      </div>
+
+      <div class="panel">
         <h2>📊 Gastos por categoría</h2>
         <div id="cats"><div class="empty">Aún no hay gastos registrados.</div></div>
       </div>
@@ -195,61 +235,210 @@
   </div>
 
   <footer>
-    FinZen · Versión demo · Tus datos se guardan solo en este navegador.
+    FinZen · Tus datos se guardan en este dispositivo · Haz respaldos seguido 💾
   </footer>
 </div>
 
 <script>
   let tipo = 'ingreso';
+  let editingId = null;
   let movimientos = JSON.parse(localStorage.getItem('finzen') || '[]');
+  let fijos = JSON.parse(localStorage.getItem('finzen_fijos') || '[]');
   let isr = parseFloat(localStorage.getItem('finzen_isr') || '0');
+  let meta = parseFloat(localStorage.getItem('finzen_meta') || '0');
 
-  function setISR(){
-    const v = parseFloat(document.getElementById('isrPct').value);
-    isr = (isNaN(v) || v < 0) ? 0 : v;
-    localStorage.setItem('finzen_isr', isr);
-    render();
-  }
+  const mesActual = new Date().toISOString().slice(0,7);
+  let selectedMonth = mesActual;
 
   const fmt = n => '$' + Number(n).toLocaleString('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2});
   const iconos = {Salario:'💵',Comida:'🍔',Transporte:'🚗',Servicios:'💡',Ocio:'🎮',Salud:'🏥',Ahorro:'🐷',Inversión:'📈',Otro:'📦'};
+  const mesKey = iso => (iso||'').slice(0,7);
+  const mesLabel = key => {
+    const [a,m] = key.split('-');
+    const d = new Date(parseInt(a), parseInt(m)-1, 1);
+    const t = d.toLocaleDateString('es-MX',{month:'long',year:'numeric'});
+    return t.charAt(0).toUpperCase()+t.slice(1);
+  };
 
+  // ---- Tipo (ingreso/gasto) ----
   function setTipo(t){
     tipo = t;
     document.getElementById('btnIn').className  = t==='ingreso' ? 'active-in' : '';
     document.getElementById('btnOut').className = t==='gasto'   ? 'active-out': '';
-    document.getElementById('categoria').value = t==='ingreso' ? 'Salario' : 'Comida';
+    if(!editingId) document.getElementById('categoria').value = t==='ingreso' ? 'Salario' : 'Comida';
   }
 
-  function agregar(){
+  // ---- Crear / Editar movimiento ----
+  function guardarMovimiento(){
     const desc = document.getElementById('desc').value.trim();
     const monto = parseFloat(document.getElementById('monto').value);
     const categoria = document.getElementById('categoria').value;
     if(!desc || !monto || monto<=0){ alert('Escribe una descripción y un monto válido 🙂'); return; }
-    movimientos.unshift({id:Date.now(), desc, monto, categoria, tipo, fecha:new Date().toISOString()});
+
+    if(editingId){
+      const m = movimientos.find(x=>x.id===editingId);
+      if(m){ m.desc=desc; m.monto=monto; m.categoria=categoria; m.tipo=tipo; }
+      cancelarEdicion();
+    } else {
+      movimientos.unshift({id:Date.now(), desc, monto, categoria, tipo, fecha:new Date().toISOString()});
+    }
     guardar();
     document.getElementById('desc').value='';
     document.getElementById('monto').value='';
     document.getElementById('desc').focus();
   }
 
+  function editar(id){
+    const m = movimientos.find(x=>x.id===id);
+    if(!m) return;
+    editingId = id;
+    document.getElementById('desc').value = m.desc;
+    document.getElementById('monto').value = m.monto;
+    document.getElementById('categoria').value = m.categoria;
+    setTipo(m.tipo);
+    document.getElementById('formTitulo').textContent = '✏️ Editar movimiento';
+    document.getElementById('btnGuardar').textContent = 'Actualizar movimiento';
+    document.getElementById('btnCancelar').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function cancelarEdicion(){
+    editingId = null;
+    document.getElementById('formTitulo').textContent = '➕ Nuevo movimiento';
+    document.getElementById('btnGuardar').textContent = 'Guardar movimiento';
+    document.getElementById('btnCancelar').style.display = 'none';
+    document.getElementById('desc').value='';
+    document.getElementById('monto').value='';
+    setTipo('ingreso');
+  }
+
   function borrar(id){
+    if(!confirm('¿Eliminar este movimiento?')) return;
     movimientos = movimientos.filter(m=>m.id!==id);
+    if(editingId===id) cancelarEdicion();
     guardar();
   }
 
+  // ---- Gastos fijos ----
+  function guardarFijo(){
+    const desc = document.getElementById('fDesc').value.trim();
+    const monto = parseFloat(document.getElementById('fMonto').value);
+    const categoria = document.getElementById('fCat').value;
+    if(!desc || !monto || monto<=0){ alert('Escribe nombre y monto del gasto fijo 🙂'); return; }
+    fijos.push({id:Date.now(), desc, monto, categoria});
+    localStorage.setItem('finzen_fijos', JSON.stringify(fijos));
+    document.getElementById('fDesc').value='';
+    document.getElementById('fMonto').value='';
+    renderFijos();
+  }
+
+  function borrarFijo(id){
+    fijos = fijos.filter(f=>f.id!==id);
+    localStorage.setItem('finzen_fijos', JSON.stringify(fijos));
+    renderFijos();
+  }
+
+  function aplicarFijo(id){
+    const f = fijos.find(x=>x.id===id);
+    if(!f) return;
+    movimientos.unshift({id:Date.now(), desc:f.desc, monto:f.monto, categoria:f.categoria, tipo:'gasto', fecha:new Date().toISOString()});
+    guardar();
+  }
+
+  // ---- ISR y Meta ----
+  function setISR(){
+    const v = parseFloat(document.getElementById('isrPct').value);
+    isr = (isNaN(v)||v<0) ? 0 : v;
+    localStorage.setItem('finzen_isr', isr);
+    render();
+  }
+  function setMeta(){
+    const v = parseFloat(document.getElementById('metaInput').value);
+    meta = (isNaN(v)||v<0) ? 0 : v;
+    localStorage.setItem('finzen_meta', meta);
+    render();
+  }
+
+  // ---- Mes ----
+  function cambiarMes(){
+    selectedMonth = document.getElementById('mesSel').value;
+    render();
+  }
+  function poblarMeses(){
+    const keys = new Set(movimientos.map(m=>mesKey(m.fecha)));
+    keys.add(mesActual);
+    const ordenadas = Array.from(keys).sort().reverse();
+    const sel = document.getElementById('mesSel');
+    let html = ordenadas.map(k=>`<option value="${k}">${mesLabel(k)}</option>`).join('');
+    html += `<option value="todos">Todos los meses</option>`;
+    sel.innerHTML = html;
+    sel.value = selectedMonth;
+  }
+
+  // ---- Persistir ----
   function guardar(){
     localStorage.setItem('finzen', JSON.stringify(movimientos));
     render();
   }
 
-  function render(){
-    const ingresos = movimientos.filter(m=>m.tipo==='ingreso').reduce((a,m)=>a+m.monto,0);
-    const gastos   = movimientos.filter(m=>m.tipo==='gasto').reduce((a,m)=>a+m.monto,0);
-    const balance  = ingresos - gastos;
+  // ---- Respaldo ----
+  function exportar(){
+    const data = {movimientos, fijos, isr, meta, exportado:new Date().toISOString()};
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'finzen-respaldo.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  function importar(ev){
+    const file = ev.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        const data = JSON.parse(reader.result);
+        if(Array.isArray(data.movimientos)){ movimientos = data.movimientos; localStorage.setItem('finzen', JSON.stringify(movimientos)); }
+        if(Array.isArray(data.fijos)){ fijos = data.fijos; localStorage.setItem('finzen_fijos', JSON.stringify(fijos)); }
+        if(typeof data.isr === 'number'){ isr = data.isr; localStorage.setItem('finzen_isr', isr); document.getElementById('isrPct').value = isr>0?isr:''; }
+        if(typeof data.meta === 'number'){ meta = data.meta; localStorage.setItem('finzen_meta', meta); document.getElementById('metaInput').value = meta>0?meta:''; }
+        renderFijos();
+        render();
+        alert('¡Respaldo restaurado! ✅');
+      }catch(e){ alert('Ese archivo no es un respaldo válido 😕'); }
+    };
+    reader.readAsText(file);
+  }
 
+  // ---- Render gastos fijos ----
+  function renderFijos(){
+    const cont = document.getElementById('fijosList');
+    if(fijos.length===0){
+      cont.innerHTML = '<div class="empty" style="padding:18px 0">Sin gastos fijos. Agrega los que se repiten cada mes 👇</div>';
+      return;
+    }
+    cont.innerHTML = fijos.map(f=>`
+      <div class="item">
+        <div class="dot" style="background:rgba(255,107,107,.15)">${iconos[f.categoria]||'📦'}</div>
+        <div class="info"><b>${f.desc}</b><span>${f.categoria} · ${fmt(f.monto)}</span></div>
+        <button class="act" onclick="aplicarFijo(${f.id})" title="Agregar este mes">➕</button>
+        <button class="act" onclick="borrarFijo(${f.id})" title="Quitar">🗑️</button>
+      </div>`).join('');
+  }
+
+  // ---- Render principal ----
+  function render(){
+    poblarMeses();
+
+    const visibles = selectedMonth==='todos'
+      ? movimientos
+      : movimientos.filter(m=>mesKey(m.fecha)===selectedMonth);
+
+    const ingresos = visibles.filter(m=>m.tipo==='ingreso').reduce((a,m)=>a+m.monto,0);
+    const gastos   = visibles.filter(m=>m.tipo==='gasto').reduce((a,m)=>a+m.monto,0);
+    const balance  = ingresos - gastos;
     const isrMonto = ingresos * (isr/100);
-    const libre = balance - isrMonto;
+    const libre    = balance - isrMonto;
 
     document.getElementById('totalIn').textContent  = fmt(ingresos);
     document.getElementById('totalOut').textContent = fmt(gastos);
@@ -257,11 +446,29 @@
     document.getElementById('isrMonto').textContent = fmt(isrMonto);
     document.getElementById('libre').textContent    = fmt(libre);
 
-    const lista = document.getElementById('lista');
-    if(movimientos.length===0){
-      lista.innerHTML = '<div class="empty">Todavía no registras nada.<br>¡Agrega tu primer movimiento! 👈</div>';
+    // Meta de ahorro (categoría Ahorro en el periodo visible)
+    const ahorrado = visibles.filter(m=>m.categoria==='Ahorro').reduce((a,m)=>a+m.monto,0);
+    const barEl = document.getElementById('metaBar');
+    const txtEl = document.getElementById('metaTexto');
+    if(meta>0){
+      const pct = Math.min(100, ahorrado/meta*100);
+      barEl.style.width = pct.toFixed(0)+'%';
+      if(ahorrado>=meta){
+        txtEl.innerHTML = `🎉 ¡Meta lograda! Ahorraste <b style="color:var(--green)">${fmt(ahorrado)}</b> de ${fmt(meta)}.`;
+      } else {
+        txtEl.innerHTML = `Llevas <b style="color:var(--green)">${fmt(ahorrado)}</b> de ${fmt(meta)} · te faltan ${fmt(meta-ahorrado)}.`;
+      }
     } else {
-      lista.innerHTML = movimientos.map(m=>{
+      barEl.style.width = '0%';
+      txtEl.innerHTML = 'Pon tu meta y registra ahorros con la categoría "Ahorro".';
+    }
+
+    // Lista
+    const lista = document.getElementById('lista');
+    if(visibles.length===0){
+      lista.innerHTML = '<div class="empty">No hay movimientos en este periodo.</div>';
+    } else {
+      lista.innerHTML = visibles.map(m=>{
         const signo = m.tipo==='ingreso' ? '+' : '−';
         const color = m.tipo==='ingreso' ? 'green' : 'red';
         const bg = m.tipo==='ingreso' ? 'rgba(61,220,151,.15)' : 'rgba(255,107,107,.15)';
@@ -270,17 +477,19 @@
           <div class="dot" style="background:${bg}">${iconos[m.categoria]||'📦'}</div>
           <div class="info"><b>${m.desc}</b><span>${m.categoria} · ${fecha}</span></div>
           <div class="amt ${color}">${signo}${fmt(m.monto)}</div>
-          <button class="del" onclick="borrar(${m.id})" title="Eliminar">🗑️</button>
+          <button class="act" onclick="editar(${m.id})" title="Editar">✏️</button>
+          <button class="act" onclick="borrar(${m.id})" title="Eliminar">🗑️</button>
         </div>`;
       }).join('');
     }
 
+    // Categorías de gasto
     const cats = {};
-    movimientos.filter(m=>m.tipo==='gasto').forEach(m=> cats[m.categoria]=(cats[m.categoria]||0)+m.monto);
+    visibles.filter(m=>m.tipo==='gasto').forEach(m=> cats[m.categoria]=(cats[m.categoria]||0)+m.monto);
     const entradas = Object.entries(cats).sort((a,b)=>b[1]-a[1]);
     const cont = document.getElementById('cats');
     if(entradas.length===0){
-      cont.innerHTML = '<div class="empty">Aún no hay gastos registrados.</div>';
+      cont.innerHTML = '<div class="empty">Aún no hay gastos en este periodo.</div>';
     } else {
       const max = entradas[0][1];
       cont.innerHTML = entradas.map(([cat,val])=>`
@@ -291,33 +500,10 @@
     }
   }
 
-  function exportar(){
-    const data = {movimientos, isr, exportado:new Date().toISOString()};
-    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'finzen-respaldo.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
-
-  function importar(ev){
-    const file = ev.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      try{
-        const data = JSON.parse(reader.result);
-        if(Array.isArray(data.movimientos)){ movimientos = data.movimientos; localStorage.setItem('finzen', JSON.stringify(movimientos)); }
-        if(typeof data.isr === 'number'){ isr = data.isr; localStorage.setItem('finzen_isr', isr); document.getElementById('isrPct').value = isr>0 ? isr : ''; }
-        render();
-        alert('¡Respaldo restaurado! ✅');
-      }catch(e){ alert('Ese archivo no es un respaldo válido 😕'); }
-    };
-    reader.readAsText(file);
-  }
-
-  if(isr > 0) document.getElementById('isrPct').value = isr;
+  // ---- Init ----
+  if(isr>0)  document.getElementById('isrPct').value = isr;
+  if(meta>0) document.getElementById('metaInput').value = meta;
+  renderFijos();
   render();
 
   if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
