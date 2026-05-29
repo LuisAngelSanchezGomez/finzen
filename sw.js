@@ -1,4 +1,4 @@
-const CACHE = 'finzen-v2';
+const CACHE = 'finzen-v3';
 const ASSETS = ['./', './index.html', './app.html', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

@@ -11,6 +11,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FinZen">
+<meta name="description" content="Controla tu dinero sin estrés con FinZen.">
+<meta property="og:title" content="FinZen — Controla tu dinero sin estrés">
+<meta property="og:description" content="Registra ingresos y gastos, ve a dónde se va tu dinero y toma el control. Gratis.">
+<meta property="og:image" content="https://luisangelsanchezgomez.github.io/finzen/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     --bg:#0f1117; --card:#1a1d27; --card2:#222634; --line:#2c3140;
@@ -91,7 +96,16 @@
   .bar{height:8px;background:var(--card2);border-radius:99px;overflow:hidden}
   .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--green))}
 
+  .insight{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:18px;font-size:13px;color:var(--muted)}
+
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px;line-height:1.6}
+
+  @media(max-width:780px){
+    body{padding:16px}
+    .card{padding:16px}
+    .card .value{font-size:22px}
+    .monthbar select{flex:1;min-width:0}
+  }
 </style>
 </head>
 <body>
@@ -112,6 +126,8 @@
     <span>📅 Mes:</span>
     <select id="mesSel" onchange="cambiarMes()"></select>
   </div>
+
+  <div id="insight" class="insight" style="display:none"></div>
 
   <div class="cards">
     <div class="card">
@@ -205,6 +221,7 @@
           ⬆️ Restaurar respaldo
           <input type="file" accept="application/json" onchange="importar(event)" style="display:none">
         </label>
+        <button class="btn btn-soft" onclick="exportarCSV()">📄 Exportar a Excel (CSV)</button>
       </div>
     </div>
 
@@ -253,6 +270,11 @@
   const fmt = n => '$' + Number(n).toLocaleString('es-MX',{minimumFractionDigits:2,maximumFractionDigits:2});
   const iconos = {Salario:'💵',Comida:'🍔',Transporte:'🚗',Servicios:'💡',Ocio:'🎮',Salud:'🏥',Ahorro:'🐷',Inversión:'📈',Otro:'📦'};
   const mesKey = iso => (iso||'').slice(0,7);
+  const mesPrevio = key => {
+    const [a,m] = key.split('-').map(Number);
+    const d = new Date(a, m-2, 1);
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+  };
   const mesLabel = key => {
     const [a,m] = key.split('-');
     const d = new Date(parseInt(a), parseInt(m)-1, 1);
@@ -391,6 +413,26 @@
     a.click();
     URL.revokeObjectURL(a.href);
   }
+  function exportarCSV(){
+    const rows = [['Fecha','Tipo','Descripcion','Categoria','Monto']];
+    movimientos.forEach(m=>{
+      rows.push([
+        new Date(m.fecha).toLocaleDateString('es-MX'),
+        m.tipo,
+        '"'+(m.desc||'').replace(/"/g,'""')+'"',
+        m.categoria,
+        m.monto
+      ]);
+    });
+    const csv = rows.map(r=>r.join(',')).join('\r\n');
+    const blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'finzen-movimientos.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
   function importar(ev){
     const file = ev.target.files[0];
     if(!file) return;
@@ -445,6 +487,21 @@
     document.getElementById('balance').textContent  = fmt(balance);
     document.getElementById('isrMonto').textContent = fmt(isrMonto);
     document.getElementById('libre').textContent    = fmt(libre);
+
+    // Comparación con el mes anterior
+    const insEl = document.getElementById('insight');
+    if(selectedMonth!=='todos'){
+      const pk = mesPrevio(selectedMonth);
+      const prevGastos = movimientos.filter(m=>m.tipo==='gasto' && mesKey(m.fecha)===pk).reduce((a,m)=>a+m.monto,0);
+      if(prevGastos>0 && gastos>0){
+        const diff = (gastos-prevGastos)/prevGastos*100;
+        const abs = Math.abs(diff).toFixed(0);
+        if(diff>1)       insEl.innerHTML = `📈 Gastaste <b style="color:var(--red)">${abs}% más</b> que en ${mesLabel(pk)} (${fmt(prevGastos)}).`;
+        else if(diff<-1) insEl.innerHTML = `📉 Gastaste <b style="color:var(--green)">${abs}% menos</b> que en ${mesLabel(pk)} (${fmt(prevGastos)}). ¡Bien hecho!`;
+        else             insEl.innerHTML = `➡️ Gastaste casi lo mismo que en ${mesLabel(pk)}.`;
+        insEl.style.display = 'block';
+      } else { insEl.style.display = 'none'; }
+    } else { insEl.style.display = 'none'; }
 
     // Meta de ahorro (categoría Ahorro en el periodo visible)
     const ahorrado = visibles.filter(m=>m.categoria==='Ahorro').reduce((a,m)=>a+m.monto,0);

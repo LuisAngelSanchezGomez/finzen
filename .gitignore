@@ -1,6 +1,9 @@
 # Archivos que no necesitan subirse
 *.zip
 gen_icons.py
+gen_og.py
+_validate.js
+_check.js
 .venv/
 venv/
 __pycache__/
