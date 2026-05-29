@@ -1,2 +1,6 @@
 # Archivos que no necesitan subirse
 *.zip
+gen_icons.py
+.venv/
+venv/
+__pycache__/

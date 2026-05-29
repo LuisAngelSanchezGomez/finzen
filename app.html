@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FinZen — App</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FinZen">
 <style>
   :root{
     --bg:#0f1117; --card:#1a1d27; --card2:#222634; --line:#2c3140;
@@ -161,6 +168,15 @@
         <span>💚 Te queda realmente libre</span>
         <b id="libre">$0</b>
       </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h2>💾 Tus datos</h2>
+        <button class="btn" style="background:var(--card2);color:var(--txt);border:1px solid var(--line);margin-top:0" onclick="exportar()">⬇️ Descargar respaldo</button>
+        <label class="btn" style="background:var(--card2);color:var(--txt);border:1px solid var(--line);display:block;text-align:center;cursor:pointer;margin-top:10px">
+          ⬆️ Restaurar respaldo
+          <input type="file" accept="application/json" onchange="importar(event)" style="display:none">
+        </label>
+      </div>
     </div>
 
     <div>
@@ -275,8 +291,36 @@
     }
   }
 
+  function exportar(){
+    const data = {movimientos, isr, exportado:new Date().toISOString()};
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'finzen-respaldo.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function importar(ev){
+    const file = ev.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        const data = JSON.parse(reader.result);
+        if(Array.isArray(data.movimientos)){ movimientos = data.movimientos; localStorage.setItem('finzen', JSON.stringify(movimientos)); }
+        if(typeof data.isr === 'number'){ isr = data.isr; localStorage.setItem('finzen_isr', isr); document.getElementById('isrPct').value = isr>0 ? isr : ''; }
+        render();
+        alert('¡Respaldo restaurado! ✅');
+      }catch(e){ alert('Ese archivo no es un respaldo válido 😕'); }
+    };
+    reader.readAsText(file);
+  }
+
   if(isr > 0) document.getElementById('isrPct').value = isr;
   render();
+
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>
